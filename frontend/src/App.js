@@ -1,5 +1,6 @@
 import User from "./components/User";
 import React, {useState, useEffect} from 'react';
+import "./App.css";
 
 export default function App(props){
 
@@ -7,7 +8,7 @@ export default function App(props){
   
   return (
     <div className="App">
-      <input type={Text} value={userID} onChange={(e) => setUserID(e.target.value)}></input>
+      <input class="Input" type={Text} value={userID} onChange={(e) => setUserID(e.target.value)}  placeholder="enter hotel's id"></input>
       <User userID={userID}></User> 
     </div>
   );

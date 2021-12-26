@@ -8,8 +8,8 @@ export default function User(props){
   const utilsService = new UtilsService();
 
   useEffect(() => {
-     utilsService.getItemsById("http://localhost:3001",props.userID).then(data => {setName(data.name);});
+     utilsService.getItemsById("http://localhost:3001/api/hotels",props.userID).then(data => {setName(data.name);});
   }, [props.userID]);
-
+  
   return(<div>{name}</div>)
 }

@@ -2,6 +2,8 @@
 const express = require("express");
 const router = express.Router();
 const hotels = require("../models/hotels");
+const  mongoose  = require("mongoose");
+
 
 router.get('/', async (req, res) => {
   const hotel = await hotels.find().exec();
@@ -10,8 +12,10 @@ router.get('/', async (req, res) => {
 
 // get  hotel by id
 router.get("/:id", async (req, res) => {
-  const hotel = await hotels.findById(req.params.id).exec();
-  res.send(hotel);
+  if(mongoose.Types.ObjectId.isValid(req.params.id)){
+    const hotel = await hotels.findById((req.params.id)).exec();
+    res.send(hotel);
+  }
   console.log(req.params.id + "was founded");
 });
 

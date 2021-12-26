@@ -1,7 +1,8 @@
 "use strict";
+const { ObjectId } = require("mongoose");
 const mongoose = require("mongoose");
+const { ObjectID } = require("mongoose/lib/schema/index");
 const hotelsSchema = mongoose.Schema({
-  
   name: {
     type: String,
   },

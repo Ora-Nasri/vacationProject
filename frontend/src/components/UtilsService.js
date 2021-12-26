@@ -7,6 +7,7 @@ export default class UtilsService {
     }
 
    getItemsById(url,id) {
+       console.log("333")
         return axios.get(`${url}/${id}`).then(res => res.data);
     }
 }
