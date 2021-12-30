@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.Input {
+  text-align: center;  
+  width: 50%;
+  margin-top: 50px;
+  height: 30px;
+}
+
+.App {
+  margin: 0px 10% 0% 10%;
+  padding: 6px 0% 0% 1%;
+}

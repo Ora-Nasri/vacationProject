@@ -1,15 +1,20 @@
-import User from "./components/User";
-import React, {useState, useEffect} from 'react';
-import "./App.css";
+import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
+import About from "./components/About/About";
+import Header from "./components/Header";
+import IndexPage from "./components/IndexPage/IndexPage";
+import './style/App.css';
 
 export default function App(props){
 
-  const [userID,setUserID]=useState();
-  
   return (
     <div className="App">
-      <input class="Input" type={Text} value={userID} onChange={(e) => setUserID(e.target.value)}  placeholder="enter hotel's id"></input>
-      <User userID={userID}></User> 
+      <Router>   
+          <Header/>          
+          <Routes>
+            <Route exact path='/' element={< IndexPage />}></Route>
+            <Route exact path='/about' element={< About />}></Route>
+          </Routes>
+       </Router>
     </div>
   );
 }
