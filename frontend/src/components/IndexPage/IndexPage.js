@@ -4,6 +4,7 @@ import '../../style/IndexPage.css';
 import Search from './Search';
 import Hotel from './Hotel';
 import Hotels from './Hotels';
+import Form from './Location';
 
 export default function IndexPage() {
     
@@ -11,11 +12,11 @@ export default function IndexPage() {
 
     return (
       <div className='App'>
-         <input className='Input' type={Text} value={userID} onChange={(e) => setUserID(e.target.value)} placeholder="enter hotel's id"></input>
-         <User userID={userID}></User> 
+          {/* <input className='Input' type={Text} value={userID} onChange={(e) => setUserID(e.target.value)} placeholder="enter hotel's id"></input>
+      <User userID={userID}></User> */}  
          <Search/>
-         <Hotel/>
          <Hotels/>
+         <Form/>
       </div>
     )
 }

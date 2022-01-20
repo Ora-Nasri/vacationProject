@@ -6,7 +6,7 @@ const hotelsSchema = mongoose.Schema({
   name: {
     type: String,
   },
-  location:{
+  address:{
     type: String,
   },
   stars:{
@@ -21,11 +21,14 @@ const hotelsSchema = mongoose.Schema({
   young_price: {
     type: Number,
   },
-  bads: {
+  num_of_beds: {
     type: Number,
   },
   text:{
       type: String,
+  },
+  img:{
+    type: String,
   }
 });
 module.exports = mongoose.model("Hotel", hotelsSchema );

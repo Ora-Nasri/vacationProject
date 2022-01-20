@@ -7,12 +7,12 @@ import './style/App.css';
 export default function App(props){
 
   return (
-    <div className="App">
+    <div >
       <Router>   
           <Header/>          
-          <Routes>
+          <Routes className="App">
             <Route exact path='/' element={< IndexPage />}></Route>
-            <Route exact path='/about' element={< About />}></Route>
+            <Route exact path='/About' element={< About />}></Route>
           </Routes>
        </Router>
     </div>
