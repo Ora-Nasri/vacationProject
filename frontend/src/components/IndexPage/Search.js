@@ -13,7 +13,7 @@ import { Button } from "primereact/button";
 export default function Search() {
   const [lazyItems, setLazyItems] = useState([]);
   const [lazyLoading, setLazyLoading] = useState(false);
-  const [selectedCity1, setSelectedCity1] = useState(null);
+  const [rate, setSelectedRate] = useState(null);
   const [selectedCity2, setSelectedCity2] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
@@ -23,13 +23,13 @@ export default function Search() {
   let loadLazyTimeout = useRef(null);
 
   const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
+    { name: "Tel Aviv-Yafo", code: "NY" },
+    { name: "Tiberias", code: "RM" },
+    { name: "Eilat", code: "LDN" },
+    { name: "Herzelia", code: "IST" },
     { name: "Paris", code: "PRS" },
   ];
-  const rate = [1, 2, 3, 4, 5];
+  const rates = [1, 2, 3, 4, 5];
 
   const items = Array.from({ length: 100000 }).map((_, i) => ({
     label: `Item #${i}`,
@@ -41,17 +41,14 @@ export default function Search() {
     setLazyLoading(false);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onCityChange = (e) => {
-    setSelectedCity1(e.value);
+  const onRateChange = (e) => {
+    setSelectedRate(e.value);
   };
 
   const onCityChange2 = (e) => {
-    setSelectedCity2(e.value);
+    setSelectedCity2(e.value.name);
   };
 
-  const handleSearch = (e) => {
-    setSelectedCity2(e.value);
-  };
 
   return (
     <div className="dropdown-demo">
@@ -61,9 +58,9 @@ export default function Search() {
           <tr>
             <td>
               <Dropdown
-                value={selectedCity1}
-                options={rate}
-                onChange={onCityChange}
+                value={rate}
+                options={rates}
+                onChange={onRateChange}
                 placeholder="rate"
               />
             </td>
@@ -82,6 +79,10 @@ export default function Search() {
                 label="Search"
                 className="p-button-outlined p-button-secondary"
               />
+            </td>
+            <td>
+              {selectedCity2}
+              {rate}
             </td>
           </tr>
           </tbody>

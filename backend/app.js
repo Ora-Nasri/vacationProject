@@ -27,10 +27,12 @@ app.use((req, res, next)=>{
 
 
 const hotelsRouter = require("./routes/hotelsRouter");
+const reviewsRouter = require("./routes/reviewsRouter");
 
 
 
 app.use("/api/hotels", hotelsRouter);
+app.use("/api/reviews", reviewsRouter);
 
 
 
