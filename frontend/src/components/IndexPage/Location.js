@@ -40,7 +40,7 @@ export default function Form(props) {
  {
           cities.map(item =>
             {
-              return <option value={item} >{item}</option>
+              return <option key={item} value={item} >{item}</option>
             })
         }
  </select>:''

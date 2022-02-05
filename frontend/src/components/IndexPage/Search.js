@@ -1,93 +1,87 @@
+import React, { useState, useEffect } from "react";
+import Hotels from "./Hotels";
+import UtilsService from "../UtilsService";
+import "../../style/IndexPage.css";
+
+import { Dropdown } from "primereact/dropdown";
+import { Button } from "primereact/button";
+
 import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 
-import ReactDOM from "react-dom";
-
-import React, { useState, useEffect, useRef } from "react";
-import { Dropdown } from "primereact/dropdown";
-import { Skeleton } from "primereact/skeleton";
-import { Button } from "primereact/button";
-
 export default function Search() {
-  const [lazyItems, setLazyItems] = useState([]);
-  const [lazyLoading, setLazyLoading] = useState(false);
   const [rate, setSelectedRate] = useState(null);
-  const [selectedCity2, setSelectedCity2] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedItem2, setSelectedItem2] = useState(null);
+  const [county, setCountry] = useState([]);
+  const [cliked, setCliked] = useState(0);
+  const [hotels, setHotels] = useState([]);
 
-  let loadLazyTimeout = useRef(null);
-
-  const cities = [
-    { name: "Tel Aviv-Yafo", code: "NY" },
-    { name: "Tiberias", code: "RM" },
-    { name: "Eilat", code: "LDN" },
-    { name: "Herzelia", code: "IST" },
-    { name: "Paris", code: "PRS" },
-  ];
-  const rates = [1, 2, 3, 4, 5];
-
-  const items = Array.from({ length: 100000 }).map((_, i) => ({
-    label: `Item #${i}`,
-    value: i,
-  }));
+  const rates = [3, 4, 5];
 
   useEffect(() => {
-    setLazyItems(Array.from({ length: 100000 }));
-    setLazyLoading(false);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const utilsService = new UtilsService();
+    utilsService.getItems("http://localhost:3001/api/hotels").then((data) => {
+      setHotels(data);
+      console.log(data);
+    });
+  }, []);
 
   const onRateChange = (e) => {
     setSelectedRate(e.value);
   };
 
-  const onCityChange2 = (e) => {
-    setSelectedCity2(e.value.name);
-  };
-
-
   return (
-    <div className="dropdown-demo">
-      <div className="card">
-        <table>
+    <div>
+      <div className="dropdown-demo">
+        <div className="card">
+          <table className="select">
             <tbody>
-          <tr>
-            <td>
-              <Dropdown
-                value={rate}
-                options={rates}
-                onChange={onRateChange}
-                placeholder="rate"
-              />
-            </td>
-            <td>
-              <Dropdown
-                value={selectedCity2}
-                options={cities}
-                onChange={onCityChange2}
-                optionLabel="name"
-                editable
-                placeholder="Select a City"
-              />
-            </td>
-            <td>
-              <Button
-                label="Search"
-                className="p-button-outlined p-button-secondary"
-              />
-            </td>
-            <td>
-              {selectedCity2}
-              {rate}
-            </td>
-          </tr>
-          </tbody>
-        </table>
+              <tr>
+                <td>
+                  <Dropdown
+                    value={rate}
+                    options={rates}
+                    onChange={onRateChange}
+                    placeholder="rate"
+                  />
+                </td>
+                <td>
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setCountry(e.target.value);
+                      console.log(e.target.value);
+                    }}
+                    placeholder="Select a City"
+                  >
+                    {" "}
+                    <option defaultValue>Select a City</option>
+                    {hotels.map((item, index) => {              
+                          <option
+                            value={item.address.split(", ").pop()}
+                            key={item.address.split(", ").pop()}
+                            name={item.address.split(", ").pop()}
+                          >
+                            {item.address.split(", ").pop()}
+                          </option>                    
+                    })}
+                  </select>
+                </td>
+                <td>
+                  <Button
+                    label="Search"
+                    className="p-button-outlined p-button-secondary"
+                    onClick={() => setCliked(1)}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+      {cliked === 1 ? <Hotels country={county} stars={rate} /> : <Hotels />}
     </div>
   );
 }

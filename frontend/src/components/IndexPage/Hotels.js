@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import UtilsService from '../UtilsService';
 import Hotel from './Hotel';
 import '../../style/IndexPage.css';
-import { ObjectId } from 'mongoose';
+
     
-export default function Hotels() {
+export default function Hotels(props)
+{
     const [hotels,setHotels]= useState([]);
     const utilsService = new UtilsService();
   
@@ -15,9 +16,16 @@ export default function Hotels() {
 
     
     return(
-        <div className="grid-container">
-            {hotels.map((hotel) => (   
-                <div className="grid-item">
+        <div className="grid-container">          
+            {console.log(props.stars)}
+            {hotels.filter(hotel => (
+                props.stars === undefined && props.stars === undefined ||           
+                hotel.stars === props.stars &&  props.country === undefined || 
+                props.stars === undefined && hotel.address.toString().toLowerCase().includes(props.country.toString().toLowerCase()) ||
+                hotel.stars === props.stars && hotel.address.toString().toLowerCase().includes(props.country.toString().toLowerCase())
+                ))
+            .map((hotel, i) => (   
+                <div className="grid-item" key={i}> 
                 <Hotel 
                        hotelName={hotel.name} 
                        address={hotel.address} 
