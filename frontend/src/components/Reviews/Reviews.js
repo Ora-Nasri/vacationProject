@@ -5,7 +5,7 @@ import '../../style/Reviews.css';
 
 
 
-export default function Reviews() {
+export default function Reviews(props) {
     const [reviews,setReviews]= useState([]);
     const utilsService = new UtilsService();
   
@@ -17,11 +17,16 @@ export default function Reviews() {
     
     return(
         <div className="grid-container">
-            {reviews.map((hotel) => (   
+            {reviews.map((review) => (   
                 <div className="grid-item">
-               
+               <Reviews 
+               hotelName={review.hotelName}
+               userName={review.userName}
+               comment={review.comment}
+               rate={review.rate}/>
                 </div>
             ))}
-        </div>  )
+        </div>  
+        )
 }
     

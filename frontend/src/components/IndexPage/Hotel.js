@@ -27,4 +27,5 @@ export default function Hotel(props) {
             </Card>   
     )
 }
-                
+  //hotelName: {
+    //userName   comment rate
